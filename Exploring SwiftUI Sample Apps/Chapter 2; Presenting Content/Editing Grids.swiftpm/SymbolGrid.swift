@@ -9,6 +9,9 @@ import SwiftUI
 
 struct SymbolGrid: View {
 
+    @State private var isAddingSymbol = false
+    @State private var isEditing = false
+
     private static let initialColumns = 3
     @State private var selectedSymbolName: String?
     @State private var numColumns = initialColumns
@@ -35,6 +38,13 @@ struct SymbolGrid: View {
 
     var body: some View {
         VStack {
+            if isEditing {
+                Stepper(columnsText, value: $numColumns, in: 1...6, step: 1) { _ in
+                    withAnimation { gridColumns = Array(repeating: GridItem(.flexible()), count: numColumns) }
+                }
+                .padding()
+            }
+
             ScrollView {
                 LazyVGrid(columns: gridColumns) {
                     ForEach(symbolNames, id: \.self) { name in
@@ -56,9 +66,9 @@ struct SymbolGrid: View {
                                         }
                                     } label: {
                                         Image(systemName: "xmark.square.fill")
-                                                    .font(Font.title)
-                                                    .symbolRenderingMode(.palette)
-                                                    .foregroundStyle(.white, Color.red)
+                                            .font(Font.title)
+                                            .symbolRenderingMode(.palette)
+                                            .foregroundStyle(.white, Color.red)
                                     }
                                     .offset(x: 7, y: -7)
                                 }
@@ -72,7 +82,32 @@ struct SymbolGrid: View {
         }
         .navigationBarTitle("My Symbols")
         .navigationBarTitleDisplayMode(.inline)
+        .sheet(isPresented: $isAddingSymbol, onDismiss: addSymbol) {
+            SymbolPicker(name: $selectedSymbolName)
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(isEditing ? "Done" : "Edit") {
+                    withAnimation { isEditing.toggle() }
+                }
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    isAddingSymbol = true
+                } label: {
+                    Image(systemName: "plus")
+                }
+                .disabled(isEditing)
+            }
+        }
 
+    }
+
+    func addSymbol() {
+        guard let name = selectedSymbolName else { return }
+        withAnimation {
+            symbolNames.insert(name, at: 0)
+        }
     }
 }
 
