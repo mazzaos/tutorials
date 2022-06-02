@@ -17,6 +17,23 @@ final class DataModel: ObservableObject {
 
     var isPhotosLoaded = false
 
+    init() {
+        Task {
+            await handleCameraPreviews()
+        }
+    }
+
+    func handleCameraPreviews() async {
+        let imageStream = camera.previewStream
+            .map { $0.image }
+
+        for await image in imageStream {
+            Task { @MainActor in
+                viewfinderImage = image
+            }
+        }
+    }
+
     func loadPhotos() async {
         guard !isPhotosLoaded else { return }
 
