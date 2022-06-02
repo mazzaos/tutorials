@@ -298,6 +298,49 @@ class Camera: NSObject {
         default: return nil
         }
     }
+
+    func takePhoto() {
+        guard let photoOutput = self.photoOutput else { return }
+
+        sessionQueue.async {
+
+            var photoSettings = AVCapturePhotoSettings()
+
+            if photoOutput.availablePhotoCodecTypes.contains(.hevc) {
+                photoSettings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.hevc])
+            }
+
+            let isFlashAvailable = self.deviceInput?.device.isFlashAvailable ?? false
+            photoSettings.flashMode = isFlashAvailable ? .auto : .off
+            photoSettings.isHighResolutionPhotoEnabled = true
+            if let previewPhotoPixelFormatType = photoSettings.availablePreviewPhotoPixelFormatTypes.first {
+                photoSettings.previewPhotoFormat = [kCVPixelBufferPixelFormatTypeKey as String: previewPhotoPixelFormatType]
+            }
+            photoSettings.photoQualityPrioritization = .balanced
+
+            if let photoOutputVideoConnection = photoOutput.connection(with: .video) {
+                if photoOutputVideoConnection.isVideoOrientationSupported,
+                   let videoOrientation = self.videoOrientationFor(self.deviceOrientation) {
+                    photoOutputVideoConnection.videoOrientation = videoOrientation
+                }
+            }
+
+            photoOutput.capturePhoto(with: photoSettings, delegate: self)
+        }
+    }
+}
+
+extension Camera: AVCapturePhotoCaptureDelegate {
+
+    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+
+        if let error = error {
+            logger.error("Error capturing photo: \(error.localizedDescription)")
+            return
+        }
+
+        addToPhotoStream?(photo)
+    }
 }
 
 extension Camera: AVCaptureVideoDataOutputSampleBufferDelegate {
