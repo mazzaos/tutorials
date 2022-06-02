@@ -57,6 +57,23 @@ struct CameraView: View {
             Spacer()
 
             Button {
+                model.camera.takePhoto()
+            } label: {
+                Label {
+                    Text("Take Photo")
+                } icon: {
+                    ZStack {
+                        Circle()
+                            .strokeBorder(.white, lineWidth: 3)
+                            .frame(width: 62, height: 62)
+                        Circle()
+                            .fill(.white)
+                            .frame(width: 50, height: 50)
+                    }
+                }
+            }
+
+            Button {
                 model.camera.switchCaptureDevice()
             } label: {
                 Label("Switch Camera", systemImage: "arrow.triangle.2.circlepath")
