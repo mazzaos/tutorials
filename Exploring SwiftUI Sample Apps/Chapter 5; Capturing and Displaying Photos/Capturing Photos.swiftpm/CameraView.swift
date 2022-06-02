@@ -56,6 +56,22 @@ struct CameraView: View {
 
             Spacer()
 
+            NavigationLink {
+                PhotoCollectionView(photoCollection: model.photoCollection)
+                    .onAppear {
+                        model.camera.isPreviewPaused = true
+                    }
+                    .onDisappear {
+                        model.camera.isPreviewPaused = false
+                    }
+            } label: {
+                Label {
+                    Text("Gallery")
+                } icon: {
+                    ThumbnailView(image: model.thumbnailImage)
+                }
+            }
+
             Button {
                 model.camera.takePhoto()
             } label: {
