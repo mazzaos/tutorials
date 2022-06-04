@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7C414583284B5E03006B5BD8 /* HexagonParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C414582284B5E03006B5BD8 /* HexagonParameters.swift */; };
+		7C414585284B5E4C006B5BD8 /* BadgeBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C414584284B5E4C006B5BD8 /* BadgeBackground.swift */; };
 		7C79EA192848B964006CB0E2 /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C79EA182848B964006CB0E2 /* FavoriteButton.swift */; };
 		7CA76FF02844CDDF00B1AC96 /* LandmarksApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA76FEF2844CDDF00B1AC96 /* LandmarksApp.swift */; };
 		7CA76FF22844CDDF00B1AC96 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA76FF12844CDDF00B1AC96 /* ContentView.swift */; };
@@ -25,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		7C414582284B5E03006B5BD8 /* HexagonParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexagonParameters.swift; sourceTree = "<group>"; };
+		7C414584284B5E4C006B5BD8 /* BadgeBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeBackground.swift; sourceTree = "<group>"; };
 		7C79EA182848B964006CB0E2 /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
 		7CA76FEC2844CDDF00B1AC96 /* Landmarks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Landmarks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CA76FEF2844CDDF00B1AC96 /* LandmarksApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarksApp.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				7C79EA1B2848B99B006CB0E2 /* Landmarks */,
 				7C79EA1A2848B985006CB0E2 /* Helpers */,
 				7C414582284B5E03006B5BD8 /* HexagonParameters.swift */,
+				7C414584284B5E4C006B5BD8 /* BadgeBackground.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -215,6 +218,7 @@
 				7C414583284B5E03006B5BD8 /* HexagonParameters.swift in Sources */,
 				7CA7700D2844DCB000B1AC96 /* LandmarkList.swift in Sources */,
 				7CA7700F2845C38600B1AC96 /* LandmarkDetail.swift in Sources */,
+				7C414585284B5E4C006B5BD8 /* BadgeBackground.swift in Sources */,
 				7CA76FFE2844D3AD00B1AC96 /* CircleImage.swift in Sources */,
 				7CA770052844D7E700B1AC96 /* Landmark.swift in Sources */,
 				7CA7700B2844DAB200B1AC96 /* LandmarkRow.swift in Sources */,
